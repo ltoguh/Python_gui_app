@@ -1,3 +1,5 @@
+# Python GUI for polarized light microscopy  image analysis
+
 This repository contains a Python GUI application designed for the analysis of 
 the polarization and phase images obtained with the microscope described in the following publications:
 
