@@ -1,14 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Tue Mar 24 18:45:46 2026
-
-@author: hugol
-"""
-
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
 Created on Tue Mar 24 15:42:17 2026
 
 @author: hugol
@@ -29,7 +21,7 @@ class MultimodalWindow(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
         
-        # --- 1. Attributs de données (Accessibles partout via self) ---
+        # Attributs de données (Accessibles partout via self)
         self.retard_data = None
         self.azimuth_data = None
         self.phase_data = None
@@ -38,7 +30,7 @@ class MultimodalWindow(QtWidgets.QMainWindow):
         self.slider_widget = None
         self.vec = None
         
-        # --- 2. Configuration de l'interface ---
+        # Configuration de l'interface
         self.setWindowTitle("OPTIMAG - Analyse de Biréfringence")
         self.setWindowIcon(QtGui.QIcon("prism.jpg"))
         self.resize(1200, 700)
@@ -62,7 +54,7 @@ class MultimodalWindow(QtWidgets.QMainWindow):
                 font-weight: bold; }
             """)
         
-        # --- 3. Lancement du calcul ---
+        # Lancement du calcul
         self.run_analysis()
 
     def init_ui(self):

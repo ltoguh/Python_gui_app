@@ -27,7 +27,7 @@ class PhaseWindow(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
         
-        # --- 1. Attributs de données (Accessibles partout via self) ---
+        # Attributs de données (Accessibles partout via self)
         self.retard_data = None
         self.azimuth_data = None
         self.rgb_data = None
@@ -39,7 +39,7 @@ class PhaseWindow(QtWidgets.QMainWindow):
         self.move(400, 200)
         self.init_ui()
         
-        # --- 3. Lancement du calcul ---
+        # 3. Lancement du calcul 
         self.run_analysis()
 
     def init_ui(self):
@@ -133,7 +133,7 @@ class PhaseWindow(QtWidgets.QMainWindow):
         except Exception as e:
             self.info_label.setText(f"Erreur : {str(e)}")
 
-    # --- Méthodes d'affichage (utilisent self.im_view) ---
+    # Méthodes d'affichage (utilisent self.im_view) 
     def display_phase(self):
         if self.phase_data is not None:
             show_phase(self.im_view, self.phase_data, self.info_label)

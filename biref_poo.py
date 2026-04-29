@@ -20,19 +20,19 @@ class BirefringenceWindow(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
         
-        # --- 1. Attributs de données (Accessibles partout via self) ---
+        # Attributs de données (Accessibles partout via self)
         self.retard_data = None
         self.azimuth_data = None
         self.rgb_data = None
         self.current_data = None
         
-        # --- 2. Configuration de l'interface ---
+        # Configuration de l'interface
         self.setWindowTitle("OPTIMAG - Analyse de Biréfringence")
         self.resize(1200, 700)
         self.move(400, 200)
         self.init_ui()
         
-        # --- 3. Lancement du calcul ---
+        # Lancement du calcul
         self.run_analysis()
 
     def init_ui(self):
@@ -147,7 +147,7 @@ class BirefringenceWindow(QtWidgets.QMainWindow):
         except Exception as e:
             self.info_label.setText(f"Erreur : {str(e)}")
 
-    # --- Méthodes d'affichage (utilisent self.im_view) ---
+    # Méthodes d'affichage (utilisent self.im_view)
     def display_retard(self):
         if self.retard_data is not None:
             show_retard(self.im_view, self.retard_data, self.info_label)

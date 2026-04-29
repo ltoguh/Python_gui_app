@@ -11,7 +11,6 @@ import matplotlib.pyplot as plt
 def statistique(view, label):
     global current_data
     
-    # 1. Récupérer l'image affichée
     current_img = view.image
 
     # Il faut modifier l'image car cv2 travaille avec du uint8, pour avoir la colormap HSV on utilise aussi hsv.Je peux faire le crop sur les datas brutes mais colormap noir/blanc

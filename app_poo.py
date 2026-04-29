@@ -3,8 +3,7 @@ import cv2
 import pyqtgraph as pg
 from pyqtgraph.Qt import QtWidgets, QtGui, QtCore
 
-# --- LES IMPORTS DE TES MODULES ---
-# On importe la CLASSE que l'on a créée précédemment
+# Importer les modules
 from biref_poo import BirefringenceWindow 
 from phase_poo import PhaseWindow 
 from multimodal_poo import MultimodalWindow 
@@ -85,7 +84,7 @@ class OptimagMain(QtWidgets.QMainWindow):
         self.multimodal_dialog = MultimodalWindow()
         self.multimodal_dialog.show()
 
-# --- LANCEMENT DE L'APPLICATION,  ne s'exécute que si on lance ce programme en tant que tel (main) ---
+# LANCEMENT DE L'APPLICATION,  ne s'exécute que si on lance ce programme en tant que tel (main) ---
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     
