@@ -6,6 +6,7 @@ Created on Tue Mar 24 15:42:17 2026
 @author: hugol
 """
 
+import os
 import numpy as np
 import cv2
 import pyqtgraph as pg
@@ -62,6 +63,7 @@ class BirefringenceWindow(QtWidgets.QMainWindow):
         self.im_view = pg.ImageView()
         self.im_view.setColorMap(pg.colormap.get('hot', source='matplotlib'))
         self.layout.addWidget(self.im_view)
+        self.open_file()
 
     def add_nav_button(self, label, callback):
         btn = QtWidgets.QPushButton(label)
@@ -83,6 +85,17 @@ class BirefringenceWindow(QtWidgets.QMainWindow):
             raise FileNotFoundError(f"Impossible de lire {name}")
         denom = 65535.0 if img.dtype == np.uint16 else 255.0
         return img.astype(np.float64) / denom
+    
+    def open_file(self):
+        file_path, _ = QtWidgets.QFileDialog.getOpenFileName(
+            self, "Ouvrir une image", "", "Images (*.png *.jpg *.tiff *.bmp)"
+        )
+        if file_path:
+            img = cv2.imread(file_path)
+            self.im_view.setImage(img)
+            self.im_view.show()
+            self.folder_name = os.path.dirname(file_path) #on vq chercher le chemin qui précède le fichier
+            self.file_name = os.path.basename(file_path)
 
     def run_analysis(self):
         
@@ -93,17 +106,27 @@ class BirefringenceWindow(QtWidgets.QMainWindow):
 
             # Chargement des séquences
             for k in range(1, Num + 1):
-                S1.append(self.load_img(f'img/25_fev_2025/b ({3+3*k}).tiff'))
-                S2.append(self.load_img(f'img/25_fev_2025/b ({2+3*k}).tiff'))
-                S3.append(self.load_img(f'img/25_fev_2025/b ({1+3*k}).tiff'))
+                self.new_path1 = os.path.join(self.folder_name, f"b ({4+4*k}).tiff")
+                self.new_path2 = os.path.join(self.folder_name, f"b ({2+4*k}).tiff")
+                self.new_path3 = os.path.join(self.folder_name, f"b ({1+4*k}).tiff")
+                #self.new_path4 = os.path.join(self.folder_name, f"b ({3+4*k}).tiff")
+                self.new_path_bg1 = os.path.join(self.folder_name, f"bg ({4+4*k}).tiff")
+                self.new_path_bg2 = os.path.join(self.folder_name, f"bg ({2+4*k}).tiff")
+                self.new_path_bg3 = os.path.join(self.folder_name, f"bg ({1+4*k}).tiff")
+                #self.new_path_bg4 = os.path.join(self.folder_name, f"bg ({3+4*k}).tiff")
                 
-                bg1.append(self.load_img(f'img/25_fev_2025/bg ({3+3*k}).tiff'))
-                bg2.append(self.load_img(f'img/25_fev_2025/bg ({2+3*k}).tiff'))
-                bg3.append(self.load_img(f'img/25_fev_2025/bg ({1+3*k}).tiff'))
+                S1.append(self.load_img(self.new_path1))
+                S2.append(self.load_img(self.new_path2))
+                S3.append(self.load_img(self.new_path3))
+                #S4.append(self.load_img(self.new_path4))
+                bg1.append(self.load_img(self.new_path_bg1))
+                bg2.append(self.load_img(self.new_path_bg2))
+                bg3.append(self.load_img(self.new_path_bg3))
+                #bg4.append(self.load_img(self.new_path_bg4))
                 
 
             # Sélection de la zone (Crop)
-            crop_img = cv2.imread('img/25_fev_2025/b (4).tiff', cv2.IMREAD_UNCHANGED)
+            crop_img = cv2.imread('img/b (7).tiff', cv2.IMREAD_UNCHANGED)
             rect = cv2.selectROI("Select Crop Area", crop_img, fromCenter=False)
             cv2.destroyWindow("Select Crop Area")
 
